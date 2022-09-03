@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculate</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+    body {
+      background-image: url('Bg2.jpg');
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+    }
+
+    .container {
+      position: absolute;
+      width: 350px;
+      height: 550px;
+      background-color: rgb(177, 215, 180);
+      border-radius: 30px 30px 10px 10px;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    h2 {
+      padding-top: 5px;
+      text-align: center;
+      border-radius: 20px 20px 0px 0px;
+      width: 350px;
+      height: 80px;
+      margin: 0 auto;
+      animation-name: example;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes example {
+      0% {
+        background-color: rgb(235, 171, 146);
+      }
+
+      25% {
+        background-color: rgb(150, 235, 219);
+      }
+
+      50% {
+        background-color: rgb(255, 222, 202);
+      }
+
+      75% {
+        background-color: rgb(235, 217, 231);
+      }
+
+      100% {
+        background-color: rgb(233, 168, 182);
+      }
+    }
+
+    .wrapper {
+      padding: 20px;
+      text-align: center;
+    }
+
+    input,
+    select {
+      border: none;
+      padding: 10px;
+    }
+
+    input:focus,
+    select:focus {
+      border: 1px solid #0074d9;
+      outline: none;
+    }
+
+    select {
+      width: 88% !important;
+    }
+
+    button {
+      margin: 20px auto;
+      width: 220px;
+      height: 40px;
+      background-color: #ca8e34;
+      color: #fff;
+      font-size: 25px;
+      border: none;
+      border-radius: 20px;
+    }
+
+    button:hover {
+      background-color: #eb9d27;
+      color: rgb(8, 8, 8);
+    }
+
+    .tip {
+      text-align: center;
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .tip p {
+      background: #a56e3700;
+      margin-top: 0;
+      font-size: 28px;
+      color: rgb(0, 0, 0);
+      border-radius: 20px;
+      padding: 5px;
+    }
+
+    .Final {
+      border: 2px solid rgb(16, 15, 17);
+      border-radius: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- min="0" -->
+
+  <h2>TIP CALCULATOR</h2>
+  <div class="container">
+    <div class="wrapper">
+      <p>Bill Amount</p>
+      <input type="number" min="0" name="number" placeholder="Enter a Value.." id="amount" required></input>
+
+      <p>How was the service ?</p>
+      <select id="services">
+        <!-- <option name="services">Rate The Service</option> -->
+        <!-- <label for="pet-select">Choose a pet:</label> -->
+        <option value="">--Please choose an option--</option>
+        <option value="0.25">25% - Top Notch</option>
+        <option value="0.20">20% - Excellent</option>
+        <option value="0.15">15% - Good</option>
+        <option value="0.10">10% - Bad</option>
+        <option value="0.05">5% - Worst</option>
+      </select>
+
+      <div>
+        <p>Total Number Of Persons</p>
+        <input type="number" name="number" id="persons" min="0"  placeholder="Enter a Value.."required>
+      </div>
+
+      <button id="calculate" onclick="calculateTip()">Calculate</button>
+
+    </div>
+
+    <div class="tip">
+      <p>Tip Amount</p>
+      <div class="Final">
+        <span id="total">0</span>₹
+        <span id="each">Each</span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script>
+    function calculateTip() {
+      let amount = document.querySelector('#amount').value;
+      let persons = document.querySelector('#persons').value;
+      let service = document.querySelector('#services').value;
+      {
+        if (amount === "" || service == 0) {
+          alert("Please enter valid values");
+          return;
+        }
+        console.log(service);
+      }
+
+      if (persons === '1') {
+        const each = document.querySelector('#each');
+        each.style.display = 'none';
+      } else {
+        var change = document.querySelector('#each')
+        change.style.color = 'red';
+
+        let total = (amount * service) / persons;
+        total = Math.round(total * 100) / 100;
+        total = total.toFixed(2);
+        document.querySelector('.tip').style.display = '';
+        document.querySelector('#total').innerHTML = total;
+      }
+    }
+  </script>
+
+</body>
+
+</html>
